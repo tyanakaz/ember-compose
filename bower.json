@@ -1,0 +1,1 @@
+{"name":"ember","dependencies":{"dom-ruler":"0.1.13","expanding-textareas":"~0.2.0"},"devDependencies":{"Faker":"~3.1.0","kjur-jsrsasign":"jsrsasign#^5.0.15","pretender":"~1.1.0"},"resolutions":{"FakeXMLHttpRequest":"1.4.0"}}

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  server:
+    build: .
+    command: /bin/bash -c 'bower install --allow-root && ember build -dev && ember serve --host 0.0.0.0 --live-reload-port 49153 --proxy ${API_ENDPOINT} --watcher polling --transparent-proxy=false'
+    env_file: .env
+    volumes:
+      - .:/usr/src/app:rw
+      - /usr/src/app/bower_components
+      - /usr/src/app/node_modules
+      - /usr/src/app/ssl
+      - /usr/src/app/tmp
+      - /usr/src/app/vendor/bundle
+      - ./vendor:/usr/src/app/vendor
+    ports:
+      - "4200:4200"
+      - "49153:49153"
+    environment:
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US:en
+      LC_ALL: en_US.UTF-8
+      TZ: Asia/Tokyo
