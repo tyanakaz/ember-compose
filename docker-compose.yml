@@ -3,7 +3,7 @@ version: '3'
 services:
   ember:
     build: .
-    command: /bin/bash -c 'bower install --allow-root && ember build -dev && ember serve --host 0.0.0.0 --live-reload-port 49153 --proxy ${API_ENDPOINT} --watcher polling --transparent-proxy=false'
+    command: /bin/bash -c 'npm install && ember build -dev && ember serve --host 0.0.0.0 --live-reload-port 49153 --proxy ${API_ENDPOINT} --watcher polling --transparent-proxy=false'
     env_file: .env
     volumes:
       - .:/usr/src/app:rw

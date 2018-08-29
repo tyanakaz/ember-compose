@@ -21,17 +21,6 @@ RUN set -x \
         && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
         && locale-gen && update-locale LANG=en_US.UTF-8
 
-# Chrome for testing
-RUN apt-get install -qy gconf-service libgconf-2-4 libnspr4 libnss3 lsb-release \
-      libpango1.0-0 libappindicator1 libcurl3 libasound2 libx11-xcb1 \
-      libxss1 libxtst6 fonts-liberation xdg-utils libgtk-3-0 \
-      libappindicator3-1 libdbusmenu-gtk3-4 libindicator3-7
-
-RUN curl -O -L https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && dpkg -i google-chrome-stable_current_amd64.deb \
-    && rm -f google-chrome-stable_current_amd64.deb \
-    && sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
-
 # node setup
 ENV NPM_CONFIG_LOGLEVEL info
 
@@ -55,11 +44,9 @@ WORKDIR /usr/src/app
 
 # Install npm_modules and bower_components
 COPY package.json /usr/src/app
-COPY bower.json /usr/src/app
 
 RUN set -x \
-        && rm -rf /usr/src/app/bower_components /usr/src/app/node_modules \
-        && npm cache clean --force && bower cache clean --allow-root \
-	&& npm install && bower install --allow-root
+        && rm -rf /usr/src/app/node_modules \ 
+        && npm install
 
 EXPOSE 4200 49153
