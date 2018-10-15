@@ -25,7 +25,7 @@ RUN set -x \
 ENV NPM_CONFIG_LOGLEVEL info
 
 # Install ember-cli and bower
-ENV EMBER_CLI_VERSION 3.1.4
+ENV EMBER_CLI_VERSION 3.4.3
 
 RUN set -x \
         && npm install -g bower ember-cli@${EMBER_CLI_VERSION}
@@ -43,10 +43,10 @@ RUN set -x \
 WORKDIR /usr/src/app
 
 # Install npm_modules and bower_components
-COPY package.json /usr/src/app
+#COPY package.json /usr/src/app
 
-RUN set -x \
-        && rm -rf /usr/src/app/node_modules \ 
-        && npm install
+#RUN set -x \
+#        && rm -rf /usr/src/app/node_modules \ 
+#        && npm install
 
 EXPOSE 4200 49153
